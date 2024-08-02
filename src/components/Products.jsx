@@ -20,6 +20,7 @@ export default function Products() {
 
 				console.log(resData);
 				setAvailableProducts(resData);
+				setIsFetching(false)
 
 			} catch(error) {
 				setError({message: error.message || 'Could not fetch products, please try again later.'} );
@@ -51,6 +52,30 @@ export default function Products() {
     //   onSelectPlace={onSelectPlace}
     // />
 		<>
+			{availableProducts && 
+				<div id="meals">
+					{availableProducts.map(product => {
+						return (
+						<div className="meal-item" key={product.id}>
+							<article>
+								<img src={`http://localhost:3000/${product.image}`} alt={product.name}/>
+								<h3>{product.name}</h3>
+								<button className="meal-item-price">
+									{product.price}
+								</button>
+								<p className="meal-item-description">
+									{product.description}
+								</p>
+								<button className="meal-item-actions button">
+									Add to Cart
+								</button>
+							</article>
+						</div>
+						);
+					})}
+					
+				</div>
+			}
 		</>
   );
 }
