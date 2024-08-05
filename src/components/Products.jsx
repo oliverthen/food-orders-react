@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Products() {
+export default function Products({onAdd}) {
 	const [isFetching, setIsFetching] = useState(false);
 	const [availableProducts, setAvailableProducts] = useState([]);
 	const [error, setError] = useState();
@@ -66,7 +66,7 @@ export default function Products() {
 								<p className="meal-item-description">
 									{product.description}
 								</p>
-								<button className="meal-item-actions button">
+								<button className="meal-item-actions button" onClick={() => onAdd(product.id)}>
 									Add to Cart
 								</button>
 							</article>

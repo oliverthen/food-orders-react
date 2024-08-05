@@ -36,23 +36,34 @@ function App() {
 
 	function handleAddCart(itemId) {
 		setCart(prevCart => {
+			let quantity;
+			if (prevCart[itemId]) {
+				quantity = prevCart[itemId];
+				return {
+					...prevCart,
+					[itemId]: quantity + 1
+				}
+			}
+
 			return {
 				...prevCart,
-				
+				[itemId]: 1
 			}
-		})
+		});
 	}
+
+	console.log(cart);
 
   return (
     <>
 			<Modal open={cartModalIsOpen}>
-        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen}/>
+        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart}/>
       </Modal>
 			<Modal open={checkoutModalIsOpen}>
 				<Checkout onClose={handleCheckoutClose}/>
 			</Modal>
       <Header onCartOpen={handleCartOpen}/>
-			<Products />
+			<Products onAdd={handleAddCart}/>
     </>
   );
 }
