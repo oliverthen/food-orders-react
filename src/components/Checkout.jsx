@@ -1,10 +1,11 @@
-export default function Checkout({onClose, onSubmit}) {
+export default function Checkout({onClose, onFormOrderSubmit}) {
 	function handleSubmit(event) {
 		event.preventDefault();
 
 		const fd = new FormData(event.target);
 		const data = Object.fromEntries(fd.entries());
 		console.log(data);
+		onFormOrderSubmit(data);
 	}
 
   return (
@@ -14,8 +15,8 @@ export default function Checkout({onClose, onSubmit}) {
 
 
 			<div className="control">
-				<label htmlFor="full-name">Full Name</label>
-				<input type="text" id="full-name" name="full-name" required/>
+				<label htmlFor="name">Full Name</label>
+				<input type="text" id="name" name="name" required/>
 			</div>
 
 			<div className="control">
@@ -41,14 +42,14 @@ export default function Checkout({onClose, onSubmit}) {
 			</div>
       
     
-      <p className="control">
+      <div className="modal-actions">
         <button type="reset" onClick={onClose}>
           Close
         </button>
         <button type="submit" className="button" onSubmit={handleSubmit}>
           Submit Order
         </button>
-      </p>
+      </div>
     </form>
   );
 }

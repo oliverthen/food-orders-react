@@ -17,9 +17,8 @@ export default function Products({onAdd, products, handleProducts}) {
 					throw new Error('Failed to fetch products');
 				}
 
-				console.log(resData);
 				handleProducts(resData);
-				setIsFetching(false);
+				setIsFetching(false);	
 				
 			} catch(error) {
 				setError({message: error.message || 'Could not fetch products, please try again later.'} );

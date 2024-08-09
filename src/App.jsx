@@ -30,6 +30,31 @@ function App() {
 		setCheckoutModalIsOpen(false);
 	}
 
+	async function handleCheckoutSubmit(data) {
+		let postData = {
+			"customer": data,
+			"items": cart
+		};
+
+		console.log(postData);
+
+		const response = await fetch('http://localhost:3000/orders', {
+			method: 'POST',
+			body: JSON.stringify({order: postData}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		const resData = await response.json();
+
+		if (!response.ok) {
+			throw new Error('Failed to submit order data.');
+		}
+
+		return resData.message;
+	}
+
 	function handleAddCart(itemId) {
 		setCart(prevCart => {
 			let quantity;
@@ -74,7 +99,7 @@ function App() {
         <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart} products={availableProducts} onMinusOneProduct={handleMinusCart} onPlusOneProduct={handleAddCart}/>
       </Modal>
 			<Modal open={checkoutModalIsOpen}>
-				<Checkout onClose={handleCheckoutClose}/>
+				<Checkout onClose={handleCheckoutClose} onFormOrderSubmit={handleCheckoutSubmit}/>
 			</Modal>
       <Header onCartOpen={handleCartOpen}/>
 			<Products onAdd={handleAddCart} products={availableProducts} handleProducts={setAvailableProducts}/>
