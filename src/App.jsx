@@ -30,10 +30,6 @@ function App() {
 		setCheckoutModalIsOpen(false);
 	}
 
-	// function handleCheckoutSubmit() {
-
-	// }
-
 	function handleAddCart(itemId) {
 		setCart(prevCart => {
 			let quantity;
@@ -52,10 +48,30 @@ function App() {
 		});
 	}
 
+	function handleMinusCart(itemId) {
+		setCart(prevCart => {
+			if (prevCart[itemId] === 1) {
+				const cartCopy = {
+					...prevCart
+				};
+
+				delete cartCopy[itemId];
+
+				return cartCopy;
+			} else {
+				let quantity = prevCart[itemId];
+				return {
+					...prevCart,
+					[itemId]: quantity - 1
+				}
+			}
+		});
+	}
+
   return (
     <>
 			<Modal open={cartModalIsOpen}>
-        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart} products={availableProducts}/>
+        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart} products={availableProducts} onMinusOneProduct={handleMinusCart} onPlusOneProduct={handleAddCart}/>
       </Modal>
 			<Modal open={checkoutModalIsOpen}>
 				<Checkout onClose={handleCheckoutClose}/>
