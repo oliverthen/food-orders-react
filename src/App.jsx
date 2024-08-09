@@ -11,7 +11,7 @@ function App() {
 	const [checkoutModalIsOpen, setCheckoutModalIsOpen] = useState(false);
 
 	const [cart, setCart] = useState({});
-
+	const [availableProducts, setAvailableProducts] = useState([]);
 
 	function handleCartOpen() {
 		setCartModalIsOpen(true);
@@ -52,18 +52,16 @@ function App() {
 		});
 	}
 
-	console.log(cart);
-
   return (
     <>
 			<Modal open={cartModalIsOpen}>
-        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart}/>
+        <Cart onClose={handleCartClose} onCheckout={handleCheckoutOpen} cart={cart} products={availableProducts}/>
       </Modal>
 			<Modal open={checkoutModalIsOpen}>
 				<Checkout onClose={handleCheckoutClose}/>
 			</Modal>
       <Header onCartOpen={handleCartOpen}/>
-			<Products onAdd={handleAddCart}/>
+			<Products onAdd={handleAddCart} products={availableProducts} handleProducts={setAvailableProducts}/>
     </>
   );
 }

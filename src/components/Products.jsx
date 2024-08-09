@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function Products({onAdd}) {
+export default function Products({onAdd, products, handleProducts}) {
 	const [isFetching, setIsFetching] = useState(false);
-	const [availableProducts, setAvailableProducts] = useState([]);
 	const [error, setError] = useState();
 
 	useEffect(() => {
@@ -19,9 +18,9 @@ export default function Products({onAdd}) {
 				}
 
 				console.log(resData);
-				setAvailableProducts(resData);
-				setIsFetching(false)
-
+				handleProducts(resData);
+				setIsFetching(false);
+				
 			} catch(error) {
 				setError({message: error.message || 'Could not fetch products, please try again later.'} );
 				setIsFetching(false);
@@ -30,7 +29,8 @@ export default function Products({onAdd}) {
 			
 		}
 
-		fetchProducts();	
+		fetchProducts();
+		
 	}, []);
 
 	// if (error) {
@@ -42,6 +42,8 @@ export default function Products({onAdd}) {
 	// 	);
 	// }
 
+	
+
   return (
     // <Places
     //   title="Available Places"
@@ -52,9 +54,9 @@ export default function Products({onAdd}) {
     //   onSelectPlace={onSelectPlace}
     // />
 		<>
-			{availableProducts && 
+			{products && 
 				<div id="meals">
-					{availableProducts.map(product => {
+					{products.map(product => {
 						return (
 						<div className="meal-item" key={product.id}>
 							<article>
