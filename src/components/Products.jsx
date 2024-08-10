@@ -44,14 +44,7 @@ export default function Products({onAdd, products, handleProducts}) {
 	
 
   return (
-    // <Places
-    //   title="Available Places"
-    //   places={availablePlaces}
-		// 	isLoading={isFetching}
-		// 	loadingText="Fetching place data..."
-    //   fallbackText="No places available."
-    //   onSelectPlace={onSelectPlace}
-    // />
+
 		<>
 			{products && 
 				<div id="meals">
@@ -61,15 +54,18 @@ export default function Products({onAdd, products, handleProducts}) {
 							<article>
 								<img src={`http://localhost:3000/${product.image}`} alt={product.name}/>
 								<h3>{product.name}</h3>
-								<button className="meal-item-price">
+								<p className="meal-item-price">
 									{product.price}
-								</button>
+								</p>
 								<p className="meal-item-description">
 									{product.description}
 								</p>
-								<button className="meal-item-actions button" onClick={() => onAdd(product.id)}>
+								<p className="meal-item-actions">
+									<button className="button" onClick={() => onAdd(product.id)}>
 									Add to Cart
-								</button>
+									</button>
+								</p>
+								
 							</article>
 						</div>
 						);
