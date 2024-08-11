@@ -32,17 +32,6 @@ export default function Products({onAdd, products, handleProducts}) {
 		
 	}, []);
 
-	// if (error) {
-	// 	return (
-	// 		<Error
-	// 			title="An error occured!"
-	// 			message={error.message}
-	// 		/>
-	// 	);
-	// }
-
-	
-
   return (
 
 		<>

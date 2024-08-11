@@ -6,6 +6,7 @@ export default function Cart({onClose, onCheckout, cart, products, onMinusOnePro
 	let totalCost = 0;
 
 
+
 	return (
 		<div className="cart">
 			<h2>Your Cart</h2>
