@@ -1,6 +1,7 @@
 
 
 export default function Cart({onClose, onCheckout, cart, products, onMinusOneProduct, onPlusOneProduct}) {
+	// Creating array of keys in cart object to cross reference them with products array
 	let cartKeys = Object.keys(cart);
 
 	let totalCost = 0;
@@ -12,6 +13,7 @@ export default function Cart({onClose, onCheckout, cart, products, onMinusOnePro
 			<h2>Your Cart</h2>
 			<ul>
 				{cartKeys.map(mealId => {
+					// Getting meal object from products array
 					const meal = products.find(meal => meal.id === mealId);
 
 					totalCost += meal.price * cart[mealId];

@@ -16,7 +16,7 @@ export default function Products({onAdd, products, handleProducts}) {
 				if (!response.ok) {
 					throw new Error('Failed to fetch products');
 				}
-
+				// Update products state in app component
 				handleProducts(resData);
 				setIsFetching(false);	
 				
